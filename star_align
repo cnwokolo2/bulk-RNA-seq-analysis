@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# define variables
+index=/home/chinye.nwokolo/IL4_organoids/STARgenome/
+# get our data files
+FILES=/home/chinye.nwokolo/IL4_organoids/fastqs/
+
+for i in *_R1.fastq.gz; do
+
+echo $i
+describe=$(echo ${i} | awk -F'[.]' '{print $1}')
+echo $describe
+
+STAR --genomeDir=$index \
+     --readFilesIn $i ${i%_R1.fastq.gz}_R2.fastq.gz \
+     --readFilesCommand zcat \
+     --outSAMtype BAM SortedByCoordinate \
+     --outFileNamePrefix ${describe}. \
+     --runThreadN 32
+
+done
+
+echo "done!"

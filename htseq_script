@@ -1,0 +1,14 @@
+#!/bin/bash
+
+samples=$( ls *.bam)
+
+for m in $samples ; do
+
+gtf="/home/chinye.nwokolo/IL4_organoids/mouse_genome/Mus_musculus/UCSC/mm10/Annotation/Genes/genes.gtf"
+echo $m
+describe=$(echo ${m} | awk -F'[.]' '{print $1}')
+echo $describe
+
+htseq-count -m union -r pos -i gene_name -a 10 --stranded=no $m $gtf > output_${describe}.counts.txt
+done ;
+

@@ -1,0 +1,10 @@
+#!/bin/bash
+export PATH=~/.conda/envs/gtac_env/bin/STAR:$PATH
+
+
+STAR --runMode genomeGenerate \
+--genomeDir ~/IL4_organoids/STARgenome/ \
+--genomeFastaFiles ~/IL4_organoids/mouse_genome/Mus_musculus/UCSC/mm10/Sequence/WholeGenomeFasta/genome.fa \
+--runThreadN 16 \
+--sjdbGTFfile ~/IL4_organoids/mouse_genome/Mus_musculus/UCSC/mm10/Annotation/Genes/genes.gtf \
+--sjdbGTFtagExonParentTranscript Parent --sjdbOverhang 100
